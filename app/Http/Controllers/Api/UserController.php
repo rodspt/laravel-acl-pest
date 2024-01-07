@@ -3,7 +3,9 @@
 namespace App\Http\Controllers\Api;
 
 use App\DTO\Users\CreatePermissionDTO;
+use App\DTO\Users\CreateUserDTO;
 use App\DTO\Users\EditPermissionDTO;
+use App\DTO\Users\EditUserDTO;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Api\StoreUserRequest;
 use App\Http\Requests\Api\UpdateUserRequest;
@@ -39,7 +41,7 @@ class UserController extends Controller
      */
     public function store(StoreUserRequest $request)
     {
-        $user = $this->userRepository->createNew(new CreatePermissionDTO(... $request->validated()));
+        $user = $this->userRepository->createNew(new CreateUserDTO(... $request->validated()));
         return new UserResource($user);
     }
 
@@ -60,7 +62,7 @@ class UserController extends Controller
      */
     public function update(UpdateUserRequest $request, string $id)
     {
-        $response = $this->userRepository->update(new EditPermissionDTO(...[$id, ...$request->validated()]));
+        $response = $this->userRepository->update(new EditUserDTO(...[$id, ...$request->validated()]));
         if(!$response){
             return response()->json(['message' => 'user not found'],Response::HTTP_NOT_FOUND);
         }
