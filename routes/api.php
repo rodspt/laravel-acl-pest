@@ -7,7 +7,7 @@ use App\Http\Controllers\Api\PermissionController;
 use App\Http\Controllers\Api\Auth\AuthApiController;
 use App\Http\Controllers\Api\PermissionUserController;
 
-Route::post('/me', [AuthApiController::class, 'me'])->name('me')->name('auth.me')->middleware('auth:sanctum');
+Route::post('/me', [AuthApiController::class, 'me'])->name('auth.me')->middleware('auth:sanctum');
 Route::post('/logout', [AuthApiController::class, 'logout'])->name('auth.logout')->middleware('auth:sanctum');
 Route::post('/auth', [AuthApiController::class, 'auth'])->name('auth.login');
 
@@ -22,3 +22,5 @@ Route::middleware(['auth:sanctum','acl'])->group(function(){
     Route::post('/users', [UserController::class, 'store'])->name('users.store');
     Route::get('/users', [UserController::class, 'index'])->name('users.index');
 });
+
+Route::get('/', fn () => response()->json(['message' => 'ok']));

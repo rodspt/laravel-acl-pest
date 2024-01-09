@@ -1,19 +1,14 @@
 <?php
 
-namespace Tests\Feature;
+use function Pest\Laravel\getJson;
 
-// use Illuminate\Foundation\Testing\RefreshDatabase;
-use Tests\TestCase;
+/*
+   Dump
+    getJson('/', ['Content-Type' => 'application/json'])->dump();
+ * */
 
-class ExampleTest extends TestCase
-{
-    /**
-     * A basic test example.
-     */
-    public function test_the_application_returns_a_successful_response(): void
-    {
-        $response = $this->get('/');
+it('should return status code 200', function () {
+    getJson('/', [ 'Content-Type' => 'application/json'])->assertStatus(200);
+});
 
-        $response->assertStatus(200);
-    }
-}
+it('should return status code 200 short', fn () => getJson('/')->assertOk());
